@@ -357,6 +357,16 @@ lib.makeOverridable (
     ]
     ++ commonMakeFlags;
 
+    preUnpack = ''
+      mkdir -p "$dev/lib/modules/${modDirVersion}"
+      cd "$dev/lib/modules/${modDirVersion}"
+    '';
+
+    postUnpack = ''
+      mv "$sourceRoot" source
+      sourceRoot=source
+    '';
+
     postPatch = ''
       # Set randstruct seed to a deterministic but diversified value. Note:
       # we could have instead patched gen-random-seed.sh to take input from
@@ -383,8 +393,8 @@ lib.makeOverridable (
     configurePhase = ''
       runHook preConfigure
 
-      mkdir build
-      export buildRoot="$(pwd)/build"
+      export buildRoot="$NIX_BUILD_TOP/build"
+      mkdir -- "$buildRoot"
 
       echo "manual-config configurePhase buildRoot=$buildRoot pwd=$PWD"
 
@@ -421,12 +431,7 @@ lib.makeOverridable (
 
       unlink $modules/lib/modules/${modDirVersion}/build
 
-      mkdir -p $dev/lib/modules/${modDirVersion}/{build,source}
-
-      # To save space, exclude a bunch of unneeded stuff when copying.
-      (cd .. && rsync --archive --prune-empty-dirs \
-          --exclude='/build/' \
-          * $dev/lib/modules/${modDirVersion}/source/)
+      mkdir -p $dev/lib/modules/${modDirVersion}/build
 
       cd $dev/lib/modules/${modDirVersion}/source
 
