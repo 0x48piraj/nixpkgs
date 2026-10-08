@@ -1,7 +1,7 @@
 {
-  lib,
   buildGo127Module,
   fetchFromGitHub,
+  lib,
   nix-update-script,
 }:
 
@@ -19,19 +19,14 @@ buildGo127Module (finalAttrs: {
 
   vendorHash = null;
 
-  ldflags = [ "-s" ];
-
   passthru.updateScript = nix-update-script { };
 
   meta = {
-    description = "Virtual HomeMatic CCU with XML-RPC & JSON-RPC servers — a standalone Go port of pydevccu for testing Home Assistant / aiohomematic integrations";
+    changelog = "https://github.com/SukramJ/godevccu/blob/${finalAttrs.src.tag}/CHANGELOG.md";
+    description = "Virtual HomeMatic CCU with XML-RPC & JSON-RPC servers";
     homepage = "https://github.com/SukramJ/godevccu";
-    changelog = "https://github.com/SukramJ/godevccu/blob/${finalAttrs.src.rev}/CHANGELOG.md";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [
-      dotlambda
-      fab
-    ];
+    maintainers = [ lib.maintainers.dotlambda ];
     mainProgram = "godevccu";
   };
 })
