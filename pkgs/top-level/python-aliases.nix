@@ -533,7 +533,6 @@ mapAliases {
   pycategories = throw "'pycategories' has been removed as it was broken and unmaintained"; # added 2025-11-08
   PyChromecast = throw "'PyChromecast' has been renamed to/replaced by 'pychromecast'"; # Converted to throw 2025-10-29
   pycrc = throw "'pycrc' has been removed because its source is unavailable"; # Added 2025-12-22
-  pydevccu = throw "'pydevccu' was replaced upstream by the top-level godevccu package"; # Added 2026-10-08
   pydns = throw "'pydns' has been renamed to/replaced by 'py3dns'"; # Converted to throw 2025-10-29
   pyechonest = throw "pyechonest was removed because it was broken and unmaintained"; # added 2025-08-26
   pyeiscp = throw "'pyeiscp' was removed because it was an unmaintained leaf package."; # added 2026-01-22
